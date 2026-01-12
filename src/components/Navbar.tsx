@@ -38,10 +38,16 @@ const Navbar = () => {
 
         {/* Auth Buttons */}
         <div className="flex items-center gap-3">
-          <Button variant="ghost" className="btn-ghost-nav hidden sm:inline-flex">
+          <Button 
+            variant="outline" 
+            className="border-[#faba60] bg-[#faba60] text-black hover:bg-[#faba60]/90 font-semibold"
+          >
             Sign in
           </Button>
-          <Button variant="hero" size="default">
+          <Button 
+            variant="default" 
+            className="bg-black text-white hover:bg-black/90 font-semibold"
+          >
             Register Now
           </Button>
         </div>
