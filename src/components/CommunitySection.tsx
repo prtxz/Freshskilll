@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, animate } from "framer-motion";
-// @ts-ignore — extensionless asset, Vite resolves correctly
-import celebrationImg from "@/assets/celebration?url";
+import celebrationImg from "../assets/celebration.png";
 
 // ─── Data ────────────────────────────────────────────────────────────────────────
 const stats = [
@@ -92,11 +91,11 @@ const CommunitySection = () => {
           <div className="text-xs font-black tracking-[0.4em] uppercase text-[#1a00a8]/50 mb-5">
             Join the Movement
           </div>
-          <h2 className="text-6xl md:text-9xl font-black text-[#1c1c1c] tracking-tighter leading-none mb-6">
+          <h2 className="text-6xl md:text-9xl font-black text-[#000000] tracking-tighter leading-none mb-6">
             OUR<br />
             <span className="text-[#ff6b35]">COMMUNITY</span>
           </h2>
-          <p className="text-[#1c1c1c]/50 text-lg md:text-xl max-w-xl mx-auto font-medium leading-relaxed">
+          <p className="text-[#000000]/50 text-lg md:text-xl max-w-xl mx-auto font-medium leading-relaxed">
             Connect with like-minded innovators, share ideas, and grow together
             in our thriving global community.
           </p>
@@ -115,10 +114,10 @@ const CommunitySection = () => {
               whileHover={{ y: -6, scale: 1.03 }}
               className="bg-[#f5f5f5] border border-black/5 rounded-3xl p-8 md:p-10 text-center cursor-default hover:border-[#ff6b35]/40 transition-colors duration-300"
             >
-              <div className="text-5xl md:text-6xl lg:text-7xl font-black text-[#1c1c1c] tracking-tight leading-none mb-3">
+              <div className="text-5xl md:text-6xl lg:text-7xl font-black text-[#000000] tracking-tight leading-none mb-3">
                 <CountUp to={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-xs font-black tracking-[0.3em] uppercase text-[#1c1c1c]/40">
+              <div className="text-xs font-black tracking-[0.3em] uppercase text-[#000000]/40">
                 {stat.label}
               </div>
             </motion.div>
@@ -131,7 +130,7 @@ const CommunitySection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-[#1c1c1c] border border-black/10 rounded-[2.5rem] p-12 md:p-16 text-center relative overflow-hidden"
+          className="bg-[#000000] border border-black/10 rounded-[2.5rem] p-12 md:p-16 text-center relative overflow-hidden"
         >
           {/* Subtle gradient blob */}
           <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-[#ff6b35]/10 blur-3xl pointer-events-none" />
@@ -147,7 +146,7 @@ const CommunitySection = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08 }}
-                  className="w-14 h-14 rounded-full flex items-center justify-center text-white font-black text-sm border-4 border-[#1c1c1c]"
+                  className="w-14 h-14 rounded-full flex items-center justify-center text-white font-black text-sm border-4 border-[#000000]"
                   style={{
                     background: `hsl(${i * 55},70%,50%)`,
                   }}
@@ -160,7 +159,7 @@ const CommunitySection = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
-                className="w-14 h-14 rounded-full bg-[#ff6b35] flex items-center justify-center text-white font-black text-xs border-4 border-[#1c1c1c]"
+                className="w-14 h-14 rounded-full bg-[#ff6b35] flex items-center justify-center text-white font-black text-xs border-4 border-[#000000]"
               >
                 +99K
               </motion.div>
@@ -174,30 +173,28 @@ const CommunitySection = () => {
             Join our community of innovators, developers, and entrepreneurs. Network, learn, and grow together.
           </p>
 
-          {/* 🖤 Full-screen white overlay — covers entire screen on hover */}
+          {/* Full-screen white overlay — pointer-events-none so it never steals hover from button */}
           <motion.div
             initial={false}
-            animate={hovered ? { opacity: 1, pointerEvents: "auto" } : { opacity: 0, pointerEvents: "none" }}
+            animate={hovered ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="fixed inset-0 bg-white z-40"
-            style={{ pointerEvents: hovered ? "auto" : "none" }}
-            onMouseEnter={handleMouseLeave}
+            className="fixed inset-0 bg-white z-40 pointer-events-none"
           />
 
           {/* Button + Celebration — sits above the overlay */}
           <div className="relative z-50 inline-flex flex-col items-center">
-            {/* Celebration illustration — centered & large */}
+            {/* Celebration illustration — absolute, centered above the button */}
             <motion.div
               initial={false}
-              animate={hovered ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 60, scale: 0.75 }}
+              animate={hovered ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.75 }}
               transition={{ type: "spring", stiffness: 240, damping: 22 }}
-              className="fixed left-1/2 -translate-x-1/2 w-[420px] md:w-[520px] pointer-events-none"
-              style={{ bottom: "calc(50% - 100px)", zIndex: 51 }}
+              className="absolute bottom-[60%] mb-4 left-1/2 -translate-x-1/2 pointer-events-none origin-bottom"
+              style={{ width: "min(600px, 100vw)", zIndex: 51 }}
             >
               <img
-                src="/assets/community/celebration.png"
+                src={celebrationImg}
                 alt="Celebration"
-                className="w-full h-full object-contain drop-shadow-2xl"
+                className="w-full h-auto object-contain drop-shadow-2xl"
               />
             </motion.div>
 
@@ -213,7 +210,7 @@ const CommunitySection = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               animate={hovered
-                ? { backgroundColor: "#1c1c1c", scale: 1.08, boxShadow: "0 0 60px rgba(28,28,28,0.4)" }
+                ? { backgroundColor: "#000000", scale: 1.08, boxShadow: "0 0 60px rgba(28,28,28,0.4)" }
                 : { backgroundColor: "#ff6b35", scale: 1, boxShadow: "0 0 40px rgba(255,107,53,0.4)" }
               }
               whileTap={{ scale: 0.96 }}

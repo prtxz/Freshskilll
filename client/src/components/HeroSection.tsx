@@ -9,6 +9,7 @@ import splash3 from "@/assets/splash-3.jpg";
 import splash4 from "@/assets/splash-4.jpg";
 import splash5 from "@/assets/splash-5.jpg";
 import splash6 from "@/assets/splash-6.jpg";
+import navmenuImg from "@/assets/navmenu.png";
 
 const HeroSection = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -149,61 +150,88 @@ const HeroSection = () => {
       {/* Full Screen Menu Overlay */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="fixed inset-0 z-50 bg-[#1a00a8] flex flex-col justify-center items-center px-6"
-          >
-            {/* Close Button */}
-            <button 
-              onClick={() => setIsMenuOpen(false)}
-              className="absolute top-6 right-6 md:top-8 md:right-10 text-white hover:text-white/80 transition-colors p-1"
-            >
-              <X className="w-10 h-10" strokeWidth={1} />
-            </button>
+          <>
+            {/* White Background Layer while dragging */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-40 bg-white"
+            />
 
-            {/* Menu Links */}
-            <nav className="flex flex-col items-center gap-6 md:gap-8 mb-10">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + i * 0.05, duration: 0.4, ease: "easeOut" }}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-4xl md:text-5xl font-heading font-bold text-white hover:text-[#faba60] transition-colors"
+            {/* Blue Sliding Page */}
+            <motion.div
+              initial={{ y: "-100%" }}
+              animate={{ y: "0%" }}
+              exit={{ y: "-100%" }}
+              transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+              className="fixed inset-0 z-50 bg-[#162454] flex flex-col justify-center items-center px-6 overflow-visible origin-top"
+            >
+              {/* The illustrator character attached to the bottom border pulling it down */}
+              <motion.div 
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className="absolute top-full left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-20 pointer-events-none z-0"
+              >
+                <img 
+                  src={navmenuImg} 
+                  alt="Menu pulling illustrator" 
+                  className="w-[200px] md:w-[350px] object-contain opacity-90 -mt-2"
+                />
+              </motion.div>
+
+              {/* Close Button */}
+              <button 
+                onClick={() => setIsMenuOpen(false)}
+                className="absolute top-6 right-6 md:top-8 md:right-10 text-white hover:text-[#faba60] transition-colors p-1 z-20"
+              >
+                <X className="w-10 h-10" strokeWidth={1} />
+              </button>
+
+              {/* Menu Links */}
+              <nav className="relative z-10 flex flex-col items-center gap-6 md:gap-8 mb-10 w-full">
+                {navLinks.map((link, i) => (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 + i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="relative text-4xl md:text-6xl font-heading font-bold text-white hover:text-[#faba60] transition-colors hover:scale-105 transform group flex items-center justify-center"
+                  >
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#faba60] text-3xl md:text-5xl absolute -left-10 md:-left-14">✦</span>
+                    {link.name}
+                  </motion.a>
+                ))}
+              </nav>
+
+              {/* Auth Buttons */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="relative z-10 flex flex-col sm:flex-row items-center gap-4 w-full max-w-sm"
+              >
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="w-full border-2 border-[#faba60] bg-[#faba60] text-black hover:bg-[#faba60]/90 font-bold text-lg py-6"
                 >
-                  {link.name}
-                </motion.a>
-              ))}
-            </nav>
-
-            {/* Auth Buttons */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.4 }}
-              className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-sm"
-            >
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="w-full border-2 border-[#faba60] bg-[#faba60] text-black hover:bg-[#faba60]/90 font-bold text-lg py-6"
-              >
-                Sign in
-              </Button>
-              <Button 
-                variant="default" 
-                size="lg"
-                className="w-full bg-white text-black hover:bg-gray-200 font-bold text-lg py-6"
-              >
-                Register Now
-              </Button>
+                  Sign in
+                </Button>
+                <Button 
+                  variant="default" 
+                  size="lg"
+                  className="w-full bg-white text-black hover:bg-gray-200 font-bold text-lg py-6"
+                >
+                  Register Now
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </section>

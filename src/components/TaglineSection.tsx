@@ -1,100 +1,101 @@
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 const TaglineSection = () => {
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 100 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any, staggerChildren: 0.1 },
     },
   };
 
-  const childVariants = {
-    hidden: { opacity: 0, y: 50, filter: "blur(10px)", rotate: -2 },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
     visible: {
-      opacity: 1, 
-      y: 0, 
-      filter: "blur(0px)",
-      rotate: 0,
-      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] },
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
     },
   };
 
   return (
-    <section className="relative w-full bg-[#fdfbf7] py-32 md:py-56 overflow-hidden flex items-center justify-center">
-      {/* Ambient Gradient Orbs */}
-      <div className="absolute top-0 right-0 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-[#faba60]/20 rounded-full blur-[100px] -z-10 translate-x-1/4 -translate-y-1/4 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] md:w-[800px] md:h-[800px] bg-[#1a00a8]/10 rounded-full blur-[120px] -z-10 -translate-x-1/4 translate-y-1/4 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#ff6b35]/15 rounded-full blur-[80px] -z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+    <section className="relative w-full bg-white pt-56 pb-32 md:pt-72 md:pb-48 overflow-hidden flex flex-col items-center">
+      {/* Massive Background Header */}
+      <div className="w-full text-center mb-[-4vw] md:mb-[-8vw] px-4 pointer-events-none select-none">
+        <motion.h2 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="font-heading text-[10vw] sm:text-[8vw] md:text-[9vw] font-black leading-tight tracking-tighter text-[#1c1c1c] uppercase"
+        >
+          Skill | Upskill | Reskill
+        </motion.h2>
+      </div>
 
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="max-w-5xl mx-auto flex flex-col items-center">
-          
-          {/* Section Eyebrow */}
-          <motion.div 
-            initial={{ opacity: 0, width: 0 }}
-            whileInView={{ opacity: 1, width: "100%" }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            className="flex flex-col items-center justify-center max-w-xs mb-10 md:mb-16 overflow-hidden"
-          >
-             <span className="font-mono text-xs md:text-sm uppercase tracking-[0.4em] text-[#ff6b35] font-bold pb-2 text-center whitespace-nowrap">
-               Elevating The Future
-             </span>
-             <span className="h-[2px] w-1/2 bg-gradient-to-r from-transparent via-[#ff6b35]/50 to-transparent"></span>
+      {/* The "Folder" Container */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="relative w-[92%] max-w-7xl bg-[#1c1c1c] rounded-t-[40px] md:rounded-t-[80px] p-8 md:p-16 lg:p-24 shadow-2xl overflow-hidden z-10"
+      >
+        {/* Punch Holes Decoration */}
+        <div className="absolute top-6 left-6 md:top-10 md:left-10 w-4 h-4 md:w-6 md:h-6 bg-white rounded-full shadow-inner opacity-80" />
+        <div className="absolute top-6 right-6 md:top-10 md:right-10 w-4 h-4 md:w-6 md:h-6 bg-white rounded-full shadow-inner opacity-80" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 mb-16 md:mb-24">
+          {/* Left Column */}
+          <motion.div variants={itemVariants} className="flex flex-col">
+            <h3 className="font-heading text-5xl md:text-7xl lg:text-8xl font-black text-[#eae3d1] leading-[0.9] tracking-tighter uppercase mb-6 md:mb-10">
+              Enhance<br />
+              <span className="opacity-80">your skills</span>
+            </h3>
+            <div className="w-full h-1 bg-[#eae3d1]/10 mb-8 md:mb-12" />
           </motion.div>
 
-          {/* Staggered Typographic Composition */}
-          <motion.h2 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="flex flex-col items-center text-center text-[#1c1c1c] leading-[0.9] tracking-tighter"
-          >
-            {/* Enhance */}
-            <motion.span 
-              variants={childVariants} 
-              className="block font-heading text-[12vw] sm:text-[7rem] md:text-[9rem] lg:text-[12rem] font-bold uppercase"
-            >
-              ENHANCE
-            </motion.span>
-
-            {/* your skills */}
-            <motion.span 
-              variants={childVariants} 
-              className="block font-serif text-[10vw] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] text-[#1c1c1c]/50 font-normal italic tracking-tight -mt-2 md:-mt-6 ml-[-10vw] md:ml-[-100px]"
-            >
-              your skills
-            </motion.span>
-            
-            {/* with Reskilll Row */}
-            <motion.span 
-              variants={childVariants} 
-              className="mt-6 md:mt-10 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 lg:mr-[-80px] w-full"
-            >
-               {/* Pill Badge */}
-               <span className="inline-flex items-center justify-center border-4 border-[#ff6b35] rounded-full px-8 py-3 md:px-12 md:py-4 -rotate-6 shadow-xl shadow-[#ff6b35]/20 bg-white/50 backdrop-blur-sm shrink-0">
-                 <span className="font-mono text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-widest text-[#ff6b35]">
-                   With
-                 </span>
-               </span>
-               
-               {/* Reskilll Solid */}
-               <span className="relative inline-block mt-4 md:mt-0">
-                 <span className="font-heading text-[14vw] sm:text-[8rem] md:text-[10rem] lg:text-[13rem] font-black uppercase tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-[#1a00a8] to-[#2400C3]/90 drop-shadow-sm">
-                   Reskilll
-                 </span>
-                 {/* Sparkle SVG decoration */}
-                 <svg className="absolute -top-4 -right-12 md:-top-10 md:-right-20 w-16 h-16 md:w-32 md:h-32 text-[#faba60] animate-[pulse_3s_ease-in-out_infinite] opacity-80" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M50 0 C55 40 60 45 100 50 C60 55 55 60 50 100 C45 60 40 55 0 50 C40 45 45 40 50 0 Z" />
-                 </svg>
-               </span>
-            </motion.span>
-          </motion.h2>
-
+          {/* Right Column */}
+          <motion.div variants={itemVariants} className="flex flex-col lg:items-end lg:text-right">
+             <h3 className="font-heading text-5xl md:text-7xl lg:text-8xl font-black text-[#eae3d1] leading-[0.9] tracking-tighter uppercase mb-6 md:mb-10 lg:ml-auto">
+              With<br />
+              <span className="text-[#faba60]">Reskilll</span>
+            </h3>
+            <div className="w-full h-1 bg-[#eae3d1]/10 mb-8 md:mb-12" />
+          </motion.div>
         </div>
-      </div>
+
+        {/* Description and CTA Row */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 border-t border-[#eae3d1]/10 pt-12 md:pt-16">
+          <motion.p 
+            variants={itemVariants}
+            className="font-mono text-xl md:text-2xl lg:text-3xl text-[#eae3d1]/80 leading-relaxed max-w-4xl text-left"
+          >
+            An Experiential learning platform helping Students, Developers, Professionals & Startups to Skill, Upskill and Reskill themselves.
+          </motion.p>
+
+          <motion.div variants={itemVariants}>
+            <Button 
+              size="lg"
+              className="bg-[#faba60] text-[#1c1c1c] hover:bg-[#eae3d1] hover:text-[#1c1c1c] font-bold text-xl md:text-2xl px-10 py-8 md:px-16 md:py-10 rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl group flex items-center gap-4 border-none"
+            >
+              Get Started
+              <motion.span
+                animate={{ x: [0, 8, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              >
+                →
+              </motion.span>
+            </Button>
+          </motion.div>
+        </div>
+
+        {/* Decorative Lines in bottom corners Like a punched card */}
+        <div className="absolute bottom-[-10px] left-[-10px] w-20 h-20 border-[10px] border-white/5 rounded-full pointer-events-none" />
+        <div className="absolute bottom-[-10px] right-[-10px] w-20 h-20 border-[10px] border-white/5 rounded-full pointer-events-none" />
+      </motion.div>
     </section>
   );
 };

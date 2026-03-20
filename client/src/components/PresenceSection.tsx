@@ -1,61 +1,46 @@
 import { motion } from "framer-motion";
-import { Globe } from "lucide-react";
-
-const countries = [
-  "India", "Australia", "Canada", "Sri Lanka", "Bangladesh", "Indonesia", 
-  "Vietnam", "Philippines", "Singapore", "USA", "Kenya", "Zambia", 
-  "Zimbabwe", "Nigeria", "Portugal", "Ukraine", "Mexico"
-];
 
 const PresenceSection = () => {
   return (
-    <section className="py-24 bg-secondary text-white relative overflow-hidden">
-      {/* Animated background globe */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-5">
-        <Globe className="w-[600px] h-[600px]" strokeWidth={0.5} />
-      </div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
+    <section className="bg-black text-white relative overflow-hidden" id="presence">
+      {/* ── Header ── */}
+      <div className="container mx-auto px-4 max-w-6xl pt-24 pb-4 text-center relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-white/10 text-white font-medium text-sm mb-4">
+          <div className="text-xs font-black tracking-[0.4em] uppercase text-white/30 mb-5">
             Global Reach
-          </span>
-          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
-            Our <span className="text-primary">Presence</span>
+          </div>
+          <h2 className="text-6xl md:text-9xl font-black tracking-tighter leading-none mb-5">
+            OUR{" "}
+            <span className="text-[#ff6b35]">PRESENCE</span>
           </h2>
-          <p className="text-xl text-white/80 mb-2">
-            We are in <span className="text-primary font-bold">17 countries</span>, and expanding!
+          <p className="text-white/90 text-2xl md:text-4xl lg:text-5xl font-medium tracking-tight mt-6">
+            We are in{" "}
+            <span className="text-white font-black">17 countries</span>
+            , and expanding!
           </p>
-        </motion.div>
-
-        {/* Countries */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto"
-        >
-          {countries.map((country, index) => (
-            <motion.span
-              key={country}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              whileHover={{ scale: 1.1, backgroundColor: "hsl(350 85% 55%)" }}
-              className="px-4 py-2 rounded-full bg-white/10 text-white/90 text-sm font-medium cursor-default transition-colors duration-300"
-            >
-              {country}
-            </motion.span>
-          ))}
+          <div className="w-14 h-[3px] bg-[#ff6b35] mx-auto mt-7" />
         </motion.div>
       </div>
+
+      {/* ── Full-width map ── */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.03 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full pb-10"
+      >
+        <img
+          src="/assets/presence.png"
+          alt="Our global presence map"
+          className="w-full h-auto object-contain block"
+        />
+      </motion.div>
     </section>
   );
 };

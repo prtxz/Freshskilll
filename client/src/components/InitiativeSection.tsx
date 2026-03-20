@@ -10,7 +10,7 @@ const initiatives = [
     description:
       "A uniquely curated initiative aimed at supporting Indian developers working on XR technologies by providing fellowships which include a stipend and mentoring by industry experts. Supports developers to make contributions to open source projects related to XR technology.",
     stat: "Open Source · XR Tech",
-    bg: "#1c1c1c",
+    bg: "#000000",
     accentBg: "#ff6b35",
     textColor: "text-white",
     descColor: "text-white/55",
@@ -27,12 +27,12 @@ const initiatives = [
       "Spark AR is the largest platform for mobile augmented reality. Over 600,000 creators from 190 countries use Spark AR Studio to ideate, design and build AR experiences, and Spark AR Hub to publish and track performance across the Facebook Family of Apps.",
     stat: "600K+ Creators · 190 Countries",
     bg: "#ff6b35",
-    accentBg: "#1c1c1c",
+    accentBg: "#000000",
     textColor: "text-white",
     descColor: "text-white/65",
-    tagColor: "#1c1c1c",
-    statText: "text-[#1c1c1c]",
-    statBorder: "border-[#1c1c1c]/20",
+    tagColor: "#000000",
+    statText: "text-[#000000]",
+    statBorder: "border-[#000000]/20",
   },
   {
     id: "03",
@@ -42,7 +42,7 @@ const initiatives = [
     description:
       "Students hold a special place in the GitHub Externship Initiative — they are the next generation of developers who will drive software innovation forward. GitHub works with Reskilll to equip future developers with the skills and experience they need to succeed in the real world.",
     stat: "1M+ Engineers / Year · India",
-    bg: "#1c1c1c",
+    bg: "#000000",
     accentBg: "#ff6b35",
     textColor: "text-white",
     descColor: "text-white/55",
@@ -59,12 +59,12 @@ const initiatives = [
       "A unique upskilling platform helping developers learn, upskill, and network through regular community events. Members work selflessly to enhance the technology learning that developers of the future need to succeed. Already making ripples of expansion across the nation.",
     stat: "Nationwide Network · Azure",
     bg: "#ff6b35",
-    accentBg: "#1c1c1c",
+    accentBg: "#000000",
     textColor: "text-white",
     descColor: "text-white/65",
-    tagColor: "#1c1c1c",
-    statText: "text-[#1c1c1c]",
-    statBorder: "border-[#1c1c1c]/20",
+    tagColor: "#000000",
+    statText: "text-[#000000]",
+    statBorder: "border-[#000000]/20",
   },
 ];
 
@@ -97,15 +97,12 @@ function StackCard({
       style={{ top: `${STICK_TOP + index * STACK_OFFSET}px`, zIndex: index + 1 }}
     >
       <motion.div
-        style={{ scale, opacity }}
+        style={{ scale, opacity, backgroundColor: initiative.bg }}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.2)] will-change-transform"
-        style={{
-          backgroundColor: initiative.bg,
-        }}
       >
         {/* Top accent bar */}
         <div
@@ -197,7 +194,7 @@ const InitiativesSection = () => {
           <div className="text-xs font-black tracking-[0.4em] uppercase text-[#ff6b35] mb-5">
             Making a Difference
           </div>
-          <h2 className="text-6xl md:text-8xl font-black text-[#1c1c1c] tracking-tighter leading-none">
+          <h2 className="text-6xl md:text-8xl font-black text-[#000000] tracking-tighter leading-none">
             Our Initiatives
           </h2>
           <div className="w-16 h-[3px] bg-[#ff6b35] mx-auto mt-6" />

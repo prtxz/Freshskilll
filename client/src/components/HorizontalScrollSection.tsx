@@ -1,14 +1,18 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import hackathonGif from "@/assets/hackathon GIF.gif";
+import bootcampGif from "../../../src/assets/bootcamp.gif";
+import startupsGif from "../../../src/assets/startups.gif";
+import jobsGif from "../../../src/assets/jobs.gif";
+import littleMindsGif from "../../../src/assets/little-minds.gif";
 
 const slides = [
   { id: 0, title: "EXPLORE OUR ECOSYSTEM", isIntro: true },
   { id: 1, title: "HACKATHON", subtitle: "Participate in various hackathons and showcase your skills.", image: hackathonGif },
-  { id: 2, title: "BOOTCAMP", subtitle: "Participate in various bootcamps and upskill yourself.", image: "/images/hackathons.png" },
-  { id: 3, title: "STARTUPS", subtitle: "Participate in various startup challenges, interact with mentors and investors.", image: "/images/startups.png" },
-  { id: 4, title: "JOBS / INTERNSHIPS", subtitle: "Get your business problem solved by the Innovators and Startups.", image: "/images/jobs.png" },
-  { id: 5, title: "LITTLE MINDS", subtitle: "Participate in various customised challenges to get your first brush with the technology.", image: "/images/little-minds.png" },
+  { id: 2, title: "BOOTCAMP", subtitle: "Participate in various bootcamps and upskill yourself.", image: bootcampGif },
+  { id: 3, title: "STARTUPS", subtitle: "Participate in various startup challenges, interact with mentors and investors.", image: startupsGif },
+  { id: 4, title: "JOBS / INTERNSHIPS", subtitle: "Get your business problem solved by the Innovators and Startups.", image: jobsGif },
+  { id: 5, title: "LITTLE MINDS", subtitle: "Participate in various customised challenges to get your first brush with the technology.", image: littleMindsGif },
 ];
 
 const HorizontalScrollSection = () => {
@@ -109,20 +113,26 @@ const HorizontalScrollSection = () => {
               ) : (
                 <>
                   {/* Graphic Object */}
-                  <div className={`relative mb-8 md:mb-12 flex justify-center items-center ${slide.id === 1 ? '' : 'drop-shadow-2xl'}`}>
-                    <div className={`transform flex flex-col items-center justify-center overflow-hidden ${slide.id === 1 ? 'w-[85vw] md:w-[60vw] max-w-[800px] h-auto aspect-[16/9] p-0 bg-transparent' : 'bg-white w-64 h-64 md:w-80 md:h-80 p-6 rounded-3xl rotate-3 border-[6px] border-[#1c1c1c] shadow-[inset_0_0_40px_rgba(0,0,0,0.05),_0_20px_50px_rgba(0,0,0,0.2)]'}`}
-                      style={slide.id === 1 ? { transform: "rotateX(50deg) rotateZ(-1deg)" } : {}}>
+                  <div className={`relative mb-8 md:mb-12 flex justify-center items-center ${(slide.id >= 1 && slide.id <= 5) ? '' : 'drop-shadow-2xl'}`}>
+                    <div className={`transform flex flex-col items-center justify-center overflow-hidden ${(slide.id >= 1 && slide.id <= 5) ? 'w-[85vw] md:w-[60vw] max-w-[800px] h-auto aspect-[16/9] p-0 bg-transparent' : 'bg-white w-64 h-64 md:w-80 md:h-80 p-6 rounded-3xl rotate-3 border-[6px] border-[#1c1c1c] shadow-[inset_0_0_40px_rgba(0,0,0,0.05),_0_20px_50px_rgba(0,0,0,0.2)]'}`}
+                      style={
+                        slide.id === 5 ? { transform: "rotateX(50deg) rotateZ(-1deg) translateY(-25vh)" } :
+                        slide.id === 4 ? { transform: "rotateX(50deg) rotateZ(-1deg) translateY(-18vh)" } :
+                        slide.id === 3 ? { transform: "rotateX(50deg) rotateZ(-1deg) translateY(-15vh)" } :
+                        slide.id === 2 ? { transform: "rotateX(50deg) rotateZ(-1deg) translateY(-12vh)" } :
+                        slide.id === 1 ? { transform: "rotateX(50deg) rotateZ(-1deg) translateY(-20px)" } : {}
+                      }>
                       {/* Placeholder for the user's images */}
                       <img
                         src={slide.image}
                         alt={slide.title}
-                        className={`w-full h-full ${slide.id === 1 ? 'object-contain mix-blend-multiply' : 'object-contain'}`}
+                        className={`w-full h-full ${(slide.id >= 1 && slide.id <= 5) ? 'object-contain mix-blend-multiply drop-shadow-[0_10px_10px_rgba(0,0,0,0.4)]' : 'object-contain'}`}
                         onError={(e) => {
                           // Fallback in case images aren't placed yet
                           (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${slide.id}&background=fcf9f2&color=ff6b35&size=512&font-size=0.5`;
                         }}
                       />
-                      {slide.id !== 1 && (
+                      {(slide.id < 1 || slide.id > 5) && (
                         <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-[#ff6b35] rounded-full border-4 border-[#1c1c1c] text-white flex items-center justify-center font-bold font-mono z-10">
                           {slide.id}
                         </div>

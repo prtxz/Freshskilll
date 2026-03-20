@@ -75,7 +75,7 @@ const TestimonialsSection = () => {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-14"
         >
           <div className="text-xs font-black tracking-[0.4em] uppercase text-[#1a00a8]/50 mb-4">
             Testimonials
