@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Brand Colors */
+    --background: 0 0% 100%;
+    --foreground: 220 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 15%;
+
+    /* Primary - Coral/Pink vibrant accent */
+    --primary: 350 85% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Deep navy */
+    --secondary: 220 60% 20%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Accent - Bright teal */
+    --accent: 175 70% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 90%;
+    --input: 220 20% 90%;
+    --ring: 350 85% 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom brand tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(350 85% 55%) 0%, hsl(20 90% 60%) 100%);
+    --glass-bg: hsla(0, 0%, 100%, 0.75);
+    --glass-border: hsla(0, 0%, 100%, 0.4);
+    --glass-shadow: 0 8px 32px hsla(220, 60%, 20%, 0.1);
+    
+    /* Partner section colors */
+    --partner-microsoft: 202 100% 45%;
+    --partner-uber: 0 0% 0%;
+    --partner-github: 0 0% 10%;
+    --partner-adobe: 0 90% 50%;
+    --partner-intuit: 168 85% 35%;
+
+    /* Animation durations */
+    --transition-fast: 150ms;
+    --transition-base: 300ms;
+    --transition-slow: 500ms;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 30% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 30% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 350 85% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 40% 25%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 175 70% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 350 85% 60%;
+
+    --glass-bg: hsla(220, 30%, 12%, 0.75);
+    --glass-border: hsla(220, 30%, 25%, 0.4);
+    --glass-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.3);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer components {
+  /* Glassmorphism */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: var(--hero-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Primary gradient button */
+  .btn-hero {
+    @apply relative overflow-hidden font-heading font-semibold;
+    background: var(--hero-gradient);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .btn-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px hsla(350, 85%, 55%, 0.4);
+  }
+
+  .btn-hero:active {
+    transform: translateY(0);
+  }
+
+  /* Ghost button for navbar */
+  .btn-ghost-nav {
+    @apply font-heading font-medium text-foreground/80 hover:text-foreground transition-colors duration-200;
+  }
+
+  .btn-outline-nav {
+    @apply font-heading font-medium border-2 border-foreground/20 hover:border-primary hover:text-primary transition-all duration-200;
+  }
+
+  /* Infinite scroll animation */
+  .scroll-container {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll-left {
+    animation: scroll-left 25s linear infinite;
+  }
+
+  /* Masonry float animation */
+  @keyframes float-up {
+    0% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+  }
+
+  .animate-float-up {
+    animation: float-up var(--duration, 15s) linear infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  /* Fade in animation for main content */
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
+
+  /* Stagger children animation */
+  .stagger-children > * {
+    opacity: 0;
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  .font-body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'Space Mono', monospace;
+  }
+
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+}
