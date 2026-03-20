@@ -1,154 +1,160 @@
 import { motion } from "framer-motion";
-import { Calendar, MapPin, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 interface Event {
   id: number;
-  title: string;
-  description: string;
+  block: string;
+  subtitle: string;
+  description: string[];
   date: string;
-  type: "Virtual" | "Offline" | "Hybrid";
+  type: string;
   tags: string[];
   image: string;
+  theme: "dark" | "blue";
 }
 
 const events: Event[] = [
   {
     id: 1,
-    title: "AI/ML Innovation Summit",
-    description: "Join industry experts to explore cutting-edge AI and Machine Learning technologies shaping the future.",
+    block: "EVENT 01",
+    subtitle: "AI/ML Innovation Summit",
+    description: [
+      "Join industry experts to explore cutting-edge AI",
+      "Machine Learning technologies shaping the future"
+    ],
     date: "Feb 15, 2024",
-    type: "Virtual",
+    type: "ONGOING",
     tags: ["AI/ML", "Innovation", "Tech"],
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=250&fit=crop",
+    image: "/assets/events/ai_ml_minimal.png",
+    theme: "dark"
   },
   {
     id: 2,
-    title: "Blockchain Developer Workshop",
-    description: "Hands-on workshop covering smart contracts, DeFi, and Web3 development fundamentals.",
+    block: "EVENT 02",
+    subtitle: "Blockchain Developer Workshop",
+    description: [
+      "Hands-on workshop covering smart contracts",
+      "DeFi, and Web3 development fundamentals"
+    ],
     date: "Feb 22, 2024",
-    type: "Offline",
-    tags: ["Blockchain", "Web3", "DeFi"],
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=250&fit=crop",
+    type: "OPEN",
+    tags: ["Web3", "Blockchain", "Dev"],
+    image: "/assets/events/blockchain_minimal.png",
+    theme: "blue"
   },
   {
     id: 3,
-    title: "Cloud Computing Masterclass",
-    description: "Learn cloud architecture, DevOps practices, and scalable infrastructure design.",
+    block: "EVENT 03",
+    subtitle: "Cloud Computing Masterclass",
+    description: [
+      "Learn cloud architecture, DevOps practices",
+      "Scalable infrastructure design and management"
+    ],
     date: "Mar 05, 2024",
-    type: "Hybrid",
+    type: "CLOSED",
     tags: ["Cloud", "DevOps", "AWS"],
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop",
-  },
+    image: "/assets/events/cloud_minimal.png",
+    theme: "dark"
+  }
 ];
 
 const EventsSection = () => {
   return (
-    <section className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4">
-        {/* Header */}
+    <section className="py-24 md:py-32 bg-[#1a00a8] relative overflow-hidden font-mono" id="events">
+      {/* Subtle Radial Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_#2a13b5_0%,_transparent_70%)] opacity-40 pointer-events-none" />
+      
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20 md:mb-24"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-4">
-            Upcoming Events
-          </span>
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground">
-            Current <span className="gradient-text">Events</span>
+          <h2 className="text-5xl md:text-8xl text-white font-black tracking-tighter mb-2">
+            EXPLORE EVENTS*
           </h2>
+          <div className="w-24 h-[1px] bg-[#ff6b35] mx-auto mt-8 shadow-[0_0_10px_#ff6b35]" />
         </motion.div>
 
-        {/* Events Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-7xl mx-auto">
           {events.map((event, index) => (
             <motion.div
               key={event.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-border/50"
+              transition={{ delay: index * 0.1, duration: 0.7 }}
+              className="group bg-[#f5f5f5] rounded-[2rem] overflow-hidden shadow-xl transition-all duration-500 hover:shadow-2xl"
             >
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
+              {/* Poster Image - Grayscale to Color */}
+              <div className="relative h-64 md:h-72 overflow-hidden bg-zinc-200">
                 <img
                   src={event.image}
-                  alt={event.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  alt={event.subtitle}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
                 
-                {/* Type Badge */}
-                <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold ${
-                  event.type === "Virtual" 
-                    ? "bg-emerald-500 text-white" 
-                    : event.type === "Offline" 
-                    ? "bg-orange-500 text-white" 
-                    : "bg-violet-500 text-white"
+                {/* Type Badge - Color coded for visibility */}
+                <div className={`absolute top-6 left-6 px-5 py-1.5 rounded-full text-white text-[10px] font-black tracking-widest uppercase shadow-lg z-20 ${
+                  event.type === "CLOSED" ? "bg-red-600 shadow-red-900/40" : "bg-[#22c55e] shadow-green-900/40"
                 }`}>
                   {event.type}
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6">
-                {/* Date */}
-                <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
-                  <Calendar className="w-4 h-4" />
+              {/* Content - Centered Alignment */}
+              <div className="p-8 md:p-10 text-center flex flex-col items-center">
+                {/* Date & Type Info - Updated to Orange for visibility */}
+                <div className="flex items-center gap-2 text-[10px] text-[#ff6b35] font-black mb-4 tracking-tighter uppercase leading-none">
                   <span>{event.date}</span>
-                  <span className="mx-2">•</span>
-                  <MapPin className="w-4 h-4" />
+                  <span className="w-1 h-1 rounded-full bg-[#ff6b35]" />
                   <span>{event.type}</span>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-xl font-heading font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {event.title}
+                <h3 className="text-2xl md:text-3xl text-[#1c1c1c] font-black tracking-tight leading-none mb-4">
+                  {event.subtitle}
                 </h3>
 
-                {/* Description */}
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                  {event.description}
+                <p className="text-sm leading-relaxed text-[#1c1c1c]/60 max-w-[280px] mb-6">
+                   {event.description.join(" ")}
                 </p>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
+                {/* Tags - Darkened for readability */}
+                <div className="flex flex-wrap justify-center gap-2 mb-8">
                   {event.tags.map((tag) => (
-                    <span
+                    <span 
                       key={tag}
-                      className="px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-medium"
+                      className="px-3 py-1 rounded-full bg-black/10 text-black/60 text-[9px] font-black tracking-widest uppercase"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
 
-              {/* Hover effect border */}
-              <div className="absolute inset-0 border-2 border-primary/0 group-hover:border-primary/50 rounded-2xl transition-colors duration-300 pointer-events-none" />
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-10 py-3 rounded-full border-2 border-black/10 text-black/60 font-black text-[10px] uppercase tracking-[0.2em] hover:bg-black hover:text-white hover:border-black transition-all duration-300"
+                >
+                  Learn More
+                </motion.button>
+              </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Explore All Link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="group font-heading font-semibold hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+        {/* Explore All - Enlarged for Visibility */}
+        <div className="mt-24 md:mt-32 text-center">
+          <motion.a
+            href="#events"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center justify-center px-12 py-5 rounded-full border-2 border-white/20 text-white font-black text-xl md:text-2xl uppercase tracking-[0.3em] transition-all hover:bg-white hover:text-[#1a00a8] hover:border-white shadow-2xl"
           >
-            Explore All Events
-            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </motion.div>
+            VIEW ALL EVENTS
+          </motion.a>
+        </div>
       </div>
     </section>
   );

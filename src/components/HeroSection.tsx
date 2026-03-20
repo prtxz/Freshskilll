@@ -1,131 +1,211 @@
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import splash1 from "@/assets/splash-1.jpg";
 import splash2 from "@/assets/splash-2.jpg";
 import splash3 from "@/assets/splash-3.jpg";
+import splash4 from "@/assets/splash-4.jpg";
+import splash5 from "@/assets/splash-5.jpg";
+import splash6 from "@/assets/splash-6.jpg";
 
 const HeroSection = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentWord, setCurrentWord] = useState("FUTURE");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev === "FUTURE" ? "TODAY" : "FUTURE"));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const navLinks = [
+    { name: "Partners", href: "#partners" },
+    { name: "Initiative", href: "#initiatives" },
+    { name: "Events", href: "#events" },
+    { name: "Community", href: "#community" },
+    { name: "Hackathon", href: "#hackathon" },
+  ];
+
   return (
-    <section className="relative min-h-screen overflow-hidden bg-background pt-32">
-      {/* Background gradient orbs */}
-      <div className="absolute -left-40 -top-40 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
-      <div className="absolute -right-40 top-1/3 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+    <section className="relative bg-white pt-2 pb-0 w-full md:pt-4">
+      <div className="mx-auto w-full px-2 md:px-4">
+        
+        {/* The true dual-arm structural S-curve container */}
+        <div className="relative w-full overflow-visible min-h-[50vh] md:min-h-[500px] lg:min-h-[600px] flex flex-row items-stretch">
+          
+          {/* BACKGROUND LAYER */}
+          <div className="absolute inset-0 flex flex-row items-stretch pointer-events-none z-0">
+            {/* LEFT ARM */}
+            <div className="relative w-[45%] bg-[#162454] mt-[70px] md:mt-[90px] rounded-br-[40px] rounded-bl-[40px] z-10 transition-all duration-300">
+              
+              {/* TOP Inner Concave Flare */}
+              <div className="absolute bottom-full right-0 w-[40px] h-[40px] bg-[#162454]">
+                 <div className="w-full h-full bg-white rounded-br-[40px]"></div>
+              </div>
 
-      <div className="container relative mx-auto px-4 md:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="stagger-children"
-          >
-            {/* Tagline */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-              <span className="font-heading text-sm font-medium text-primary">Skill</span>
-              <span className="text-muted-foreground">|</span>
-              <span className="font-heading text-sm font-medium text-primary">Upskill</span>
-              <span className="text-muted-foreground">|</span>
-              <span className="font-heading text-sm font-medium text-primary">Reskilll</span>
             </div>
 
-            {/* Main Heading */}
-            <h1 className="mb-6 font-heading text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
-              Enhance your skills with{" "}
-              <span className="gradient-text">Reskilll</span>
-            </h1>
+            {/* RIGHT ARM */}
+            <div className="relative w-[55%] bg-[#162454] mb-[70px] md:mb-[90px] -ml-[1px] rounded-tl-[40px] rounded-tr-[40px] z-0 transition-all duration-300">
+              
+              {/* BOTTOM Inner Concave Flare */}
+              <div className="absolute top-full left-[1px] w-[40px] h-[40px] bg-[#162454]">
+                 <div className="w-full h-full bg-white rounded-tl-[40px]"></div>
+              </div>
 
-            {/* Description */}
-            <p className="mb-8 max-w-lg text-lg leading-relaxed text-muted-foreground">
-              An Experiential learning platform helping Students, Developers,
-              Professionals & Startups to Skill, Upskill and Reskill themselves.
-            </p>
-
-            {/* CTA Button */}
-            <Button variant="hero" size="lg" className="group">
-              Get Started
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </motion.div>
-
-          {/* Right Content - Image Grid */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="relative hidden lg:block"
-          >
-            <div className="relative grid grid-cols-2 gap-4">
-              {/* Decorative element */}
-              <motion.div
-                initial={{ scale: 0, rotate: -45 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 0.8, duration: 0.5, type: "spring" }}
-                className="absolute -right-8 -top-8 h-16 w-16"
-              >
-                <svg viewBox="0 0 100 100" className="h-full w-full text-primary">
-                  <path
-                    d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"
-                    fill="currentColor"
-                    opacity="0.3"
-                  />
-                </svg>
-              </motion.div>
-
-              {/* Image 1 - Large */}
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-                className="col-span-1 row-span-2"
-              >
-                <div className="overflow-hidden rounded-2xl shadow-2xl">
-                  <img
-                    src={splash1}
-                    alt="Hackathon event"
-                    className="h-full w-full object-cover"
-                    style={{ aspectRatio: "3/4" }}
-                  />
-                </div>
-              </motion.div>
-
-              {/* Image 2 */}
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-              >
-                <div className="overflow-hidden rounded-2xl shadow-xl">
-                  <img
-                    src={splash2}
-                    alt="Bootcamp session"
-                    className="h-full w-full object-cover"
-                    style={{ aspectRatio: "4/3" }}
-                  />
-                </div>
-              </motion.div>
-
-              {/* Image 3 */}
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
-              >
-                <div className="overflow-hidden rounded-2xl shadow-xl">
-                  <img
-                    src={splash3}
-                    alt="Startup pitch"
-                    className="h-full w-full object-cover"
-                    style={{ aspectRatio: "4/3" }}
-                  />
-                </div>
-              </motion.div>
             </div>
-          </motion.div>
+          </div>
+
+
+          {/* FOREGROUND / CONTENT LAYER */}
+          <div className="relative z-20 w-full h-full flex flex-col pointer-events-none pb-[70px] md:pb-[90px]">
+            
+            {/* Logo Area */}
+            <div className="h-[70px] md:h-[90px] w-full flex items-center px-4 md:px-10 pointer-events-auto">
+              <a href="/" className="flex items-center gap-1">
+                <span className="font-heading text-xl md:text-3xl font-bold text-black flex items-center tracking-tight">
+                  Reskill<span className="text-[#faba60] font-bold ml-1 translate-y-[2px]">_</span><span className="font-sans ml-[1px]">l</span>
+                </span>
+              </a>
+            </div>
+
+            {/* Content Container: Text on Left, Images on Right */}
+            <div className="flex-1 flex flex-col xl:flex-row w-full px-6 md:px-16 mt-4 md:mt-8 pointer-events-auto">
+              
+              {/* Left Text */}
+              <div className="xl:w-[60%] flex flex-col justify-center xl:pr-8">
+                <motion.h1 
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                  className="font-mono text-[11vw] sm:text-6xl md:text-[6rem] lg:text-[7.5rem] xl:text-[8.5rem] font-bold text-white tracking-wide uppercase leading-tight md:leading-[1.05] break-words"
+                >
+                  DEFINING<br className="md:hidden" />{" "}
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={currentWord}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="inline-block"
+                    >
+                      {currentWord}*
+                    </motion.span>
+                  </AnimatePresence>
+                </motion.h1>
+              </div>
+
+              {/* Right Images Animation (Carousel) */}
+              <div className="hidden xl:flex xl:w-[40%] relative justify-center items-center mt-10 xl:mt-0 h-[450px] overflow-hidden">
+                
+                {/* Gradient Masks to blend into the blue section */}
+                <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#1a00a8] to-transparent z-10 pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#1a00a8] to-transparent z-10 pointer-events-none"></div>
+
+                {/* Infinite Scroll Container */}
+                <motion.div 
+                  className="flex flex-col gap-6 w-[70%] max-w-[320px] absolute"
+                  animate={{ y: [0, "-50%"] }}
+                  transition={{ 
+                    duration: 30, 
+                    ease: "linear", 
+                    repeat: Infinity 
+                  }}
+                >
+                  {[splash1, splash2, splash4, splash5, splash6, splash1, splash2, splash4, splash5, splash6].map((img, idx) => (
+                    <div 
+                      key={idx} 
+                      className="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 shrink-0"
+                    >
+                      <img src={img} alt={`Splash ${idx}`} className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </motion.div>
+
+              </div>
+
+            </div>
+            
+          </div>
+
+          {/* Hamburger Menu (in the blue area on the top right) */}
+          <div className="absolute top-6 right-6 md:top-8 md:right-10 z-50 pointer-events-auto">
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-white hover:text-white/80 transition-colors p-1"
+              aria-label="Toggle menu"
+            >
+              <Menu className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />
+            </button>
+          </div>
+
         </div>
       </div>
+
+      {/* Full Screen Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="fixed inset-0 z-50 bg-[#1a00a8] flex flex-col justify-center items-center px-6"
+          >
+            {/* Close Button */}
+            <button 
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute top-6 right-6 md:top-8 md:right-10 text-white hover:text-white/80 transition-colors p-1"
+            >
+              <X className="w-10 h-10" strokeWidth={1} />
+            </button>
+
+            {/* Menu Links */}
+            <nav className="flex flex-col items-center gap-6 md:gap-8 mb-10">
+              {navLinks.map((link, i) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.05, duration: 0.4, ease: "easeOut" }}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-4xl md:text-5xl font-heading font-bold text-white hover:text-[#faba60] transition-colors"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* Auth Buttons */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.4 }}
+              className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-sm"
+            >
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="w-full border-2 border-[#faba60] bg-[#faba60] text-black hover:bg-[#faba60]/90 font-bold text-lg py-6"
+              >
+                Sign in
+              </Button>
+              <Button 
+                variant="default" 
+                size="lg"
+                className="w-full bg-white text-black hover:bg-gray-200 font-bold text-lg py-6"
+              >
+                Register Now
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -5,7 +5,6 @@ import HeroSection from "@/components/HeroSection";
 import TaglineSection from "@/components/TaglineSection";
 import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 import PartnersSection from "@/components/PartnersSection";
-import FlowingMenu from "@/components/FlowingMenu";
 import EventsSection from "@/components/EventsSection";
 import InitiativesSection from "@/components/InitiativeSection";
 import HackathonsSection from "@/components/HackathonSection";
@@ -40,7 +39,6 @@ const Index = () => {
         <TaglineSection />
         <HorizontalScrollSection />
         <PartnersSection />
-        <FlowingMenu />
         <EventsSection />
         <InitiativesSection />
         <HackathonsSection />

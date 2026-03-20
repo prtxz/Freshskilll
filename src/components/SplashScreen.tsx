@@ -101,14 +101,47 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
           <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/50 to-secondary/30" />
 
           {/* Logo and loading indicator */}
+          {/* Logo and loading indicator */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
             className="absolute inset-0 flex flex-col items-center justify-center"
+            style={{ perspective: "1500px" }}
           >
-            <h1 className="font-heading text-5xl font-bold text-primary-foreground md:text-7xl">
-              Reskil<span className="gradient-text">ll</span>
+            <h1 
+              className="font-mono text-5xl font-bold text-primary-foreground md:text-7xl flex"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {"Reskilll".split("").map((char, index) => (
+                <motion.span
+                  key={index}
+                  className={index >= 6 ? "gradient-text" : ""}
+                  initial={{ 
+                    x: index % 2 === 0 ? -300 : 300, 
+                    y: index % 2 === 0 ? -100 : 100,
+                    z: 600,
+                    scale: 2,
+                    opacity: 0 
+                  }}
+                  animate={{ 
+                    x: 0, 
+                    y: 0,
+                    z: 0,
+                    scale: 1,
+                    opacity: 1 
+                  }}
+                  transition={{ 
+                    duration: 1.6, 
+                    delay: 0.2 + index * 0.1, 
+                    type: "spring",
+                    bounce: 0.4
+                  }}
+                  style={{ display: "inline-block" }}
+                >
+                  {char}
+                </motion.span>
+              ))}
             </h1>
             <motion.div
               initial={{ width: 0 }}

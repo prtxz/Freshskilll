@@ -1,132 +1,189 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
     id: 1,
-    quote: "I have been associated with both the Vistara and Dish-Tv hackathons which were conducted by Reskilll. They were the most professionally conducted hacks. They seem to know the magic sauce to make people feel at place.",
+    quote: "I have been associated with both the Vistara and Dish-TV hackathons conducted by Reskilll. They were the most professionally conducted hacks. They seem to know the magic sauce to make people feel right at place.",
     author: "Chidroop Iyyhapan",
     role: "Software Developer at Meta",
-    avatar: "CI",
+    initials: "CI",
+    color: "#ff6b35",
   },
   {
     id: 2,
-    quote: "Reskilll has been instrumental in connecting talented individuals with global opportunities. Their hackathons are world-class and their community is incredibly supportive.",
+    quote: "Reskilll has been instrumental in connecting talented individuals with global opportunities. Their hackathons are world-class and their community is incredibly supportive and energising.",
     author: "Sarah Johnson",
     role: "Engineering Lead at Google",
-    avatar: "SJ",
+    initials: "SJ",
+    color: "#1a00a8",
   },
   {
     id: 3,
-    quote: "The level of professionalism and organization at Reskilll events is unmatched. They truly understand how to create an environment where innovation thrives.",
+    quote: "The level of professionalism and organisation at Reskilll events is unmatched. They truly understand how to create an environment where innovation thrives beyond expectations.",
     author: "Michael Chen",
     role: "CTO at TechStartup",
-    avatar: "MC",
+    initials: "MC",
+    color: "#16a34a",
   },
 ];
 
 const TestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  const goTo = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
   };
 
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  const next = () => {
+    const next = (currentIndex + 1) % testimonials.length;
+    setDirection(1);
+    setCurrentIndex(next);
+  };
+
+  const prev = () => {
+    const prev = (currentIndex - 1 + testimonials.length) % testimonials.length;
+    setDirection(-1);
+    setCurrentIndex(prev);
+  };
+
+  const t = testimonials[currentIndex];
+
+  const slideVariants = {
+    enter: (dir: number) => ({ opacity: 0, x: dir * 60 }),
+    center: { opacity: 1, x: 0 },
+    exit: (dir: number) => ({ opacity: 0, x: -dir * 60 }),
   };
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-primary/5 to-accent/5 blur-3xl" />
-      
-      <div className="container mx-auto px-4 relative z-10">
+    <section className="py-28 bg-white relative overflow-hidden" id="testimonials">
+      {/* Faint dot grid */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.06]"
+        style={{
+          backgroundImage: "radial-gradient(circle, #1a00a8 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-4">
+          <div className="text-xs font-black tracking-[0.4em] uppercase text-[#1a00a8]/50 mb-4">
             Testimonials
-          </span>
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground">
-            What Our <span className="gradient-text">Partners Say?</span>
+          </div>
+          <h2 className="text-5xl md:text-7xl font-black text-[#1c1c1c] tracking-tighter leading-none">
+            WHAT THEY <span className="text-[#ff6b35]">SAY</span>
           </h2>
+          <div className="w-14 h-[3px] bg-[#ff6b35] mx-auto mt-7" />
         </motion.div>
 
-        {/* Testimonial Card */}
-        <div className="max-w-4xl mx-auto">
-          <div className="relative bg-card rounded-3xl p-8 md:p-12 shadow-xl border border-border/50">
-            {/* Quote icon */}
-            <div className="absolute -top-6 left-8 w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-              <Quote className="w-6 h-6 text-white" />
-            </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="text-center"
-              >
-                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-8 italic">
-                  "{testimonials[currentIndex].quote}"
-                </p>
-
-                <div className="flex flex-col items-center">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-xl mb-4">
-                    {testimonials[currentIndex].avatar}
-                  </div>
-                  <h4 className="text-xl font-heading font-bold text-foreground">
-                    {testimonials[currentIndex].author}
-                  </h4>
-                  <p className="text-muted-foreground">
-                    {testimonials[currentIndex].role}
-                  </p>
+        {/* Main card */}
+        <div className="relative">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={currentIndex}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-0 border border-black/10 rounded-[2rem] overflow-hidden shadow-[0_8px_60px_rgba(0,0,0,0.07)]"
+            >
+              {/* Left – quote block */}
+              <div className="bg-white p-10 md:p-16 flex flex-col justify-between min-h-[400px]">
+                {/* Opening quote mark */}
+                <div
+                  className="text-[9rem] leading-none font-black select-none -mt-6 -ml-2"
+                  style={{ color: t.color, opacity: 0.18, fontFamily: "Georgia, serif" }}
+                >
+                  "
                 </div>
-              </motion.div>
-            </AnimatePresence>
 
-            {/* Navigation */}
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={prevTestimonial}
-                className="rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </Button>
+                {/* Quote text */}
+                <blockquote className="text-[#1c1c1c] text-xl md:text-2xl lg:text-3xl font-bold leading-snug tracking-tight -mt-10 flex-1">
+                  {t.quote}
+                </blockquote>
 
-              {/* Dots */}
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentIndex ? "bg-primary w-6" : "bg-muted-foreground/30"
-                    }`}
-                  />
-                ))}
+                {/* Author row */}
+                <div className="mt-10 flex items-center gap-5 border-t border-black/8 pt-8">
+                  <div
+                    className="w-14 h-14 rounded-full flex items-center justify-center text-white font-black text-lg shrink-0"
+                    style={{ background: t.color }}
+                  >
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div className="font-black text-[#1c1c1c] text-lg tracking-tight">{t.author}</div>
+                    <div className="text-[#1c1c1c]/45 text-sm font-semibold tracking-wide">{t.role}</div>
+                  </div>
+
+                  {/* Navigation arrows pushed to right */}
+                  <div className="ml-auto flex items-center gap-3">
+                    <button
+                      onClick={prev}
+                      className="w-11 h-11 rounded-full border-2 border-black/10 flex items-center justify-center hover:border-[#ff6b35] hover:text-[#ff6b35] transition-all duration-200"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={next}
+                      className="w-11 h-11 rounded-full border-2 border-black/10 flex items-center justify-center hover:border-[#ff6b35] hover:text-[#ff6b35] transition-all duration-200"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={nextTestimonial}
-                className="rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all"
+              {/* Right – person image panel */}
+              <div
+                className="w-full md:w-72 lg:w-80 relative hidden md:block"
+                style={{ background: `linear-gradient(135deg, ${t.color}18, ${t.color}38)` }}
               >
-                <ChevronRight className="w-5 h-5" />
-              </Button>
-            </div>
+                {/* Large monogram / avatar placeholder */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div
+                    className="w-40 h-40 rounded-full flex items-center justify-center text-white font-black text-5xl shadow-2xl"
+                    style={{ background: t.color }}
+                  >
+                    {t.initials}
+                  </div>
+                </div>
+
+                {/* Decorative corner accent */}
+                <div
+                  className="absolute bottom-0 right-0 w-32 h-32 opacity-20"
+                  style={{
+                    background: `radial-gradient(circle at bottom right, ${t.color}, transparent 70%)`,
+                  }}
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Dot indicators */}
+          <div className="flex justify-center gap-2 mt-8">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className="h-2 rounded-full transition-all duration-300"
+                style={{
+                  width: i === currentIndex ? "2rem" : "0.5rem",
+                  background: i === currentIndex ? "#ff6b35" : "#1c1c1c22",
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>

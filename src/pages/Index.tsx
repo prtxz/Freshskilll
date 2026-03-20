@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import SplashScreen from "@/components/SplashScreen";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import TaglineSection from "@/components/TaglineSection";
+import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 import PartnersSection from "@/components/PartnersSection";
-import FlowingMenu from "@/components/FlowingMenu";
 import EventsSection from "@/components/EventsSection";
-import InitiativesSection from "@/components/InitiativesSection";
-import HackathonsSection from "@/components/HackathonsSection";
+import InitiativesSection from "@/components/InitiativeSection";
+import HackathonsSection from "@/components/HackathonSection";
 import CommunitySection from "@/components/CommunitySection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import PresenceSection from "@/components/PresenceSection";
@@ -32,12 +33,12 @@ const Index = () => {
   return (
     <>
       {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
-      
+
       <main className={showSplash ? "invisible" : "visible"}>
-        <Navbar />
         <HeroSection />
+        <TaglineSection />
+        <HorizontalScrollSection />
         <PartnersSection />
-        <FlowingMenu />
         <EventsSection />
         <InitiativesSection />
         <HackathonsSection />
