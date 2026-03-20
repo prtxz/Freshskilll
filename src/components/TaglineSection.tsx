@@ -21,9 +21,9 @@ const TaglineSection = () => {
   };
 
   return (
-    <section className="relative w-full bg-white pt-56 pb-32 md:pt-72 md:pb-48 overflow-hidden flex flex-col items-center">
+    <section className="relative w-full bg-white pt-16 pb-32 md:pt-24 md:pb-48 overflow-hidden flex flex-col items-center">
       {/* Massive Background Header */}
-      <div className="w-full text-center mb-[-4vw] md:mb-[-8vw] px-4 pointer-events-none select-none">
+      <div className="w-full text-center mb-0 md:mb-0 px-4 pointer-events-none select-none">
         <motion.h2 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

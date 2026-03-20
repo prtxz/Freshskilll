@@ -109,7 +109,7 @@ const HeroSection = () => {
 
                 {/* Infinite Scroll Container */}
                 <motion.div 
-                  className="flex flex-col gap-6 w-[70%] max-w-[320px] absolute"
+                  className="flex flex-col gap-6 w-[85%] max-w-[420px] absolute"
                   animate={{ y: [0, "-50%"] }}
                   transition={{ 
                     duration: 30, 
@@ -120,7 +120,7 @@ const HeroSection = () => {
                   {[splash1, splash2, splash4, splash5, splash6, splash1, splash2, splash4, splash5, splash6].map((img, idx) => (
                     <div 
                       key={idx} 
-                      className="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 shrink-0"
+                      className="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl shrink-0"
                     >
                       <img src={img} alt={`Splash ${idx}`} className="w-full h-full object-cover" />
                     </div>
